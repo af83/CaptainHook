@@ -26,8 +26,13 @@ defmodule CaptainHook do
     end
 
     defp build_directory(provider) do
+      date = Timex.Date.now
       Path.absname("hooks")
-        |> Path.join(provider)
+        |> Path.join(provider |> to_string)
+        |> Path.join(date.year |> to_string)
+        |> Path.join(date.month |> to_string)
+        |> Path.join(date.day |> to_string)
+        |> Path.join(date.hour |> to_string)
     end
 
     defp build_path(provider) do
@@ -40,7 +45,7 @@ defmodule CaptainHook do
     end
 
     defp mkdir_and_retry(provider, body) do
-      build_directory(provider) |> File.mkdir!
+      build_directory(provider) |> File.mkdir_p!
       build_path(provider) |> File.write(body)
     end
   end
