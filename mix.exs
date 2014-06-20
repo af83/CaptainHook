@@ -27,7 +27,8 @@ defmodule CaptainHook.Mixfile do
   defp deps do
     [
       {:cowboy, github: "extend/cowboy"},
-      { :uuid,  github: "travis/erlang-uuid" },
+      {:uuid,  github: "travis/erlang-uuid" },
+      {:timex, "~> 0.8.0"},
       {:plug, "~> 0.5"},
     ]
   end
