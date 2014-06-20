@@ -12,7 +12,7 @@ defmodule CaptainHook.Mixfile do
   #
   # Type `mix help compile.app` for more information
   def application do
-    [applications: [:cowboy, :plug]]
+    [applications: [:cowboy, :plug, :httpotion]]
   end
 
   # Dependencies can be hex.pm packages:
@@ -27,6 +27,7 @@ defmodule CaptainHook.Mixfile do
   defp deps do
     [
       {:cowboy, github: "extend/cowboy"},
+      {:httpotion, github: "myfreeweb/httpotion"},
       {:uuid,  github: "travis/erlang-uuid" },
       {:timex, "~> 0.8.0"},
       {:plug, "~> 0.5"},

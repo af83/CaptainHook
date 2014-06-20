@@ -49,4 +49,59 @@ defmodule CaptainHook do
       build_path(provider) |> File.write(body)
     end
   end
+
+  defmodule Simulate do
+    def run(options) do
+      provider = options[:provider] || providers
+      host     = options[:host]
+      date     = options[:date]
+      simulate(provider, host, date)
+    end
+
+    def simulate(providers, host, date) when is_list(providers) do
+      Parallel.pmap(providers, fn(provider) -> simulate(provider, host, date) end)
+    end
+
+    def simulate(provider, host, date) do
+      Path.absname("hooks")
+        |> Path.join(provider)
+        |> Path.join(date || "")
+        |> Path.join("**/*.hook")
+        |> Path.wildcard
+        |> post(host, provider)
+    end
+
+    defp post(files, host, provider) when is_list(files) do
+      Enum.each(files, fn(file) -> post(file, host, provider) end)
+    end
+
+    defp post(file, host, provider) do
+      {:ok, body} = File.read(file)
+      Path.join(host, provider)
+        |> HTTPotion.post(body)
+        |> log(provider)
+    end
+
+    defp log(response, provider) do
+      date = Timex.Date.now |> Timex.DateFormat.format!("{RFC1123}")
+      IO.inspect "[#{provider}] #{date} #{response.status_code}"
+    end
+
+    defp providers do
+      Path.absname("hooks")
+        |> Path.join("*")
+        |> Path.wildcard
+        |> Enum.map(fn(dir) -> Path.basename(dir) end)
+    end
+  end
+end
+
+defmodule Parallel do
+  def pmap(collection, fun) do
+    me = self
+
+    collection
+      |> Enum.map(fn (elem) -> spawn_link fn -> (send me, { self, fun.(elem)}) end end)
+      |> Enum.map(fn (pid) -> receive do { ^pid, result } -> result end end)
+  end
 end
