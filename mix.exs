@@ -12,7 +12,7 @@ defmodule CaptainHook.Mixfile do
   #
   # Type `mix help compile.app` for more information
   def application do
-    [applications: []]
+    [applications: [:cowboy, :plug]]
   end
 
   # Dependencies can be hex.pm packages:
@@ -25,6 +25,9 @@ defmodule CaptainHook.Mixfile do
   #
   # Type `mix help deps` for more examples and options
   defp deps do
-    []
+    [
+      {:cowboy, github: "extend/cowboy"},
+      {:plug, "~> 0.5"},
+    ]
   end
 end
