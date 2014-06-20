@@ -2,4 +2,6 @@
 
 CaptainHook is a quick, untested and ugly hook sniffer.
 
-Launch with `mix server`.
+Elixir mus be installed.
+
+Launch with `mix do deps.get, server`.
