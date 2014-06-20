@@ -1,0 +1,2 @@
+defmodule CaptainHook do
+end
