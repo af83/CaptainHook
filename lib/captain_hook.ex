@@ -21,6 +21,11 @@ defmodule CaptainHook do
       send_resp(conn, 202, "")
     end
 
+    get "/dropbox" do
+      conn = Plug.Conn.fetch_params(conn)
+      send_resp(conn, 200, conn.params["challenge"])
+    end
+
     match _ do
       send_resp(conn, 404, "Not Found")
     end
