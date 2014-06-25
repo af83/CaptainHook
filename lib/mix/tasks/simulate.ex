@@ -12,11 +12,12 @@ defmodule Mix.Tasks.Simulate do
     * `-h`, `--host`     - the host to simulate on
     * `-d`, `--date`     - as a path `year`, `year/month/day/hour`
     * `-p`, `--provider` - provider to test oprovider to test onn
+    * `-s`, `--segment`  - path of the url
 
   """
   def run(args) do
     Mix.Task.run "app.start", args
-    OptionParser.parse(args, aliases: [h: :host, d: :date, p: :provider])
+    OptionParser.parse(args, aliases: [h: :host, d: :date, p: :provider, s: :segment])
       |> elem(0)
       |> CaptainHook.Simulate.run
   end

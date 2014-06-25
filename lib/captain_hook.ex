@@ -60,31 +60,32 @@ defmodule CaptainHook do
       provider = options[:provider] || providers
       host     = options[:host]
       date     = options[:date]
-      simulate(provider, host, date)
+      path     = options[:segment] || ":provider"
+      simulate(provider, host, path, date)
     end
 
-    def simulate(providers, host, date) when is_list(providers) do
-      Parallel.pmap(providers, fn(provider) -> simulate(provider, host, date) end)
+    def simulate(providers, host, path, date) when is_list(providers) do
+      Parallel.pmap(providers, fn(provider) -> simulate(provider, host, path, date) end)
     end
 
-    def simulate(provider, host, date) do
+    def simulate(provider, host, path, date) do
       Path.absname("hooks")
         |> Path.join(provider)
         |> Path.join(date || "")
         |> Path.join("**/*.hook")
         |> Path.wildcard
-        |> post(host, provider)
+        |> post(host, String.replace(path, ":provider", provider))
     end
 
-    defp post(files, host, provider) when is_list(files) do
-      Enum.each(files, fn(file) -> post(file, host, provider) end)
+    defp post(files, host, path) when is_list(files) do
+      Enum.each(files, fn(file) -> post(file, host, path) end)
     end
 
-    defp post(file, host, provider) do
+    defp post(file, host, path) do
       {:ok, body} = File.read(file)
-      Path.join(host, provider)
+      Path.join(host, path)
         |> HTTPotion.post(body)
-        |> log(provider)
+        |> log(path)
     end
 
     defp log(response, provider) do
