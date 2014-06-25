@@ -27,7 +27,7 @@ defmodule CaptainHook do
     end
 
     match _ do
-      send_resp(conn, 404, "Not Found")
+      send_resp(conn, 200, "")
     end
 
     defp build_directory(provider) do
