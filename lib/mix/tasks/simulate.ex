@@ -9,15 +9,16 @@ defmodule Mix.Tasks.Simulate do
 
   ## Command line options
 
-    * `-h`, `--host`     - the host to simulate on
-    * `-d`, `--date`     - as a path `year`, `year/month/day/hour`
-    * `-p`, `--provider` - provider to test oprovider to test onn
-    * `-s`, `--segment`  - path of the url
+    * `-h`, `--host`      - the host to simulate on
+    * `-d`, `--date`      - as a path `year`, `year/month/day/hour`
+    * `-p`, `--provider`  - provider to test oprovider to test onn
+    * `-s`, `--segment`   - path of the url
+    * `-f`, `--frequency` - frequency in milliseconds
 
   """
   def run(args) do
     Mix.Task.run "app.start", args
-    OptionParser.parse(args, aliases: [h: :host, d: :date, p: :provider, s: :segment])
+    OptionParser.parse(args, aliases: [h: :host, d: :date, p: :provider, s: :segment, f: :frequency])
       |> elem(0)
       |> CaptainHook.Simulate.run
   end

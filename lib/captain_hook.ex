@@ -61,31 +61,36 @@ defmodule CaptainHook do
       host     = options[:host]
       date     = options[:date]
       path     = options[:segment] || ":provider"
-      simulate(provider, host, path, date)
+      frequency = case options[:frequency] do
+        nil         -> 0
+        frequency   -> frequency |> String.to_integer
+      end
+      simulate(provider, host, path, date, frequency)
     end
 
-    def simulate(providers, host, path, date) when is_list(providers) do
-      Parallel.pmap(providers, fn(provider) -> simulate(provider, host, path, date) end)
+    def simulate(providers, host, path, date, frequency) when is_list(providers) do
+      Parallel.pmap(providers, fn(provider) -> simulate(provider, host, path, date, frequency) end)
     end
 
-    def simulate(provider, host, path, date) do
+    def simulate(provider, host, path, date, frequency) do
       Path.absname("hooks")
         |> Path.join(provider)
         |> Path.join(date || "")
         |> Path.join("**/*.hook")
         |> Path.wildcard
-        |> post(host, String.replace(path, ":provider", provider))
+        |> post(host, String.replace(path, ":provider", provider), frequency)
     end
 
-    defp post(files, host, path) when is_list(files) do
-      Enum.each(files, fn(file) -> post(file, host, path) end)
+    defp post(files, host, path, frequency) when is_list(files) do
+      Enum.each(files, fn(file) -> post(file, host, path, frequency) end)
     end
 
-    defp post(file, host, path) do
+    defp post(file, host, path, frequency) do
       {:ok, body} = File.read(file)
       Path.join(host, path)
         |> HTTPotion.post(body)
         |> log(path)
+      :timer.sleep(frequency)
     end
 
     defp log(response, provider) do
