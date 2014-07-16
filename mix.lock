@@ -4,5 +4,5 @@
   "ibrowse": {:git, "git://github.com/cmullaparthi/ibrowse.git", "7871e2ebe8811efb64e1917e2de455fa87e8dfe3", [tag: "v4.1.0"]},
   "plug": {:package, "0.5.1"},
   "ranch": {:git, "git://github.com/extend/ranch.git", "3189ef2d47843945efc96c224963380462c33d40", [ref: "0.10.0"]},
-  "timex": {:package, "0.8.0"},
+  "timex": {:package, "0.10.0"},
   "uuid": {:git, "git://github.com/travis/erlang-uuid.git", "f6a1cf9027e4af78b4a81201f4f6db1a822b8316", []}}

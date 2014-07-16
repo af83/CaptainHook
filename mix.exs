@@ -29,7 +29,7 @@ defmodule CaptainHook.Mixfile do
       {:cowboy, github: "extend/cowboy"},
       {:httpotion, github: "myfreeweb/httpotion"},
       {:uuid,  github: "travis/erlang-uuid" },
-      {:timex, "~> 0.8.0"},
+      {:timex, "~> 0.8"},
       {:plug, "~> 0.5"},
     ]
   end
