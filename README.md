@@ -20,7 +20,9 @@ mix simulate -h host.com
 ``` shell
 Command line options
 
-• -h, --host     - the host to simulate on
-• -d, --date     - as a path year, year/month/day/hour
-• -p, --provider - provider to test oprovider to test onn
+• -h, --host      - the host to simulate on
+• -d, --date      - as a path year, year/month/day/hour
+• -p, --provider  - provider to test oprovider to test onn
+• -s, --segment   - path of the url
+• -f, --frequency - frequency in milliseconds
 ```
