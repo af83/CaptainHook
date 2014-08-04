@@ -26,11 +26,11 @@ defmodule CaptainHook.Mixfile do
   # Type `mix help deps` for more examples and options
   defp deps do
     [
-      {:cowboy, github: "extend/cowboy"},
       {:httpotion, github: "myfreeweb/httpotion"},
-      {:uuid,  github: "travis/erlang-uuid" },
-      {:timex, "~> 0.8"},
-      {:plug, "~> 0.5"},
+      {:uuid,      github: "travis/erlang-uuid" },
+      {:timex,     "~> 0.8"},
+      {:plug,      "~> 0.5"},
+      {:cowboy,    "~> 1.0"}
     ]
   end
 end
