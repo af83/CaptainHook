@@ -4,7 +4,7 @@ defmodule CaptainHook.Mixfile do
   def project do
     [app: :captain_hook,
      version: "0.0.1",
-     elixir: "~> 0.14.1",
+     elixir: "~> 0.15",
      deps: deps]
   end
 
