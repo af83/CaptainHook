@@ -27,7 +27,7 @@ defmodule CaptainHook.Mixfile do
   defp deps do
     [
       {:httpotion, github: "myfreeweb/httpotion"},
-      {:uuid,      github: "travis/erlang-uuid" },
+      {:uuid,      "~> 0.1.3"},
       {:timex,     "~> 0.8"},
       {:plug,      "~> 0.5"},
       {:cowboy,    "~> 1.0"}

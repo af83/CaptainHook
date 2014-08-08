@@ -46,7 +46,7 @@ defmodule CaptainHook do
     end
 
     defp uuid do
-      String.replace(to_string(:uuid.to_string(:uuid.v4())), "-", "")
+      UUID.uuid4(:hex)
     end
 
     defp mkdir_and_retry(provider, body) do

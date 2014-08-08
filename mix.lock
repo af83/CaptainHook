@@ -5,4 +5,4 @@
   "plug": {:package, "0.5.3"},
   "ranch": {:package, "1.0.0"},
   "timex": {:package, "0.10.0"},
-  "uuid": {:git, "git://github.com/travis/erlang-uuid.git", "f6a1cf9027e4af78b4a81201f4f6db1a822b8316", []}}
+  "uuid": {:package, "0.1.3"}}
