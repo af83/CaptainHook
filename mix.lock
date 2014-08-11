@@ -5,4 +5,4 @@
   "plug": {:package, "0.5.3"},
   "ranch": {:package, "1.0.0"},
   "timex": {:package, "0.10.0"},
-  "uuid": {:package, "0.1.3"}}
+  "uuid": {:package, "0.1.4"}}
